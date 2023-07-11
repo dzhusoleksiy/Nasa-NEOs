@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Spinner from "react-bootstrap/Spinner";
 import Day from "./Day";
 
-const API_KEY = "PXjG2k4gTiQT1uLnemaLCDAX3RDa7jRbL69WIROx";
+const API_KEY = import.meta.env.VITE_NASA_API_KEY;
 
 const DaysList = () => {
   const [days, setDays] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const startOfMonth = new Date(
         currentDate.getFullYear(),
         currentDate.getMonth(),
@@ -28,7 +32,6 @@ const DaysList = () => {
         const res = await fetch(API_URL);
         const data = await res.json();
         const nearEarthObjects = data.near_earth_objects[fetchDateStr];
-
         const newDay = {
           date: fetchDateStr,
           nearEarthObjects,
@@ -59,6 +62,8 @@ const DaysList = () => {
         });
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -76,7 +81,7 @@ const DaysList = () => {
           .length
     );
 
-    const sortedCounts = hazardousCounts.slice().sort((a, b) => b - a);
+    const sortedCounts = [...new Set(hazardousCounts)].sort((a, b) => b - a);
     const topTwoCounts = sortedCounts.slice(0, 2);
 
     return days.map(({ date, nearEarthObjects }) => {
@@ -101,7 +106,7 @@ const DaysList = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 gap-2">
+    <div className="grid grid-cols-1 my-[10px] gap-[10px]">
       {getTopHazardousDays().map(
         ({ date, nearEarthObjects, isHighlighted }) => (
           <Day
@@ -112,6 +117,7 @@ const DaysList = () => {
           />
         )
       )}
+      {days.length < 6 && loading && <Spinner className="mx-auto mt-[40px]" animation="border" />}
     </div>
   );
 };

@@ -1,11 +1,16 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+module.exports = {
+  content: ["./src/**/*.{html,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        oxfordBlue: "#0E1428",
+        powderBlue: "#AEC5EB",
+        xanthous: "#FFC145",
+        seaGreen: "#008148",
+        auburn: "#A22522",
+      },
+    },
   },
   plugins: [],
-}
+};
