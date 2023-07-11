@@ -40,17 +40,17 @@ const Day = ({ date, nearEarthObjects }) => {
     (neo) => neo.is_potentially_hazardous_asteroid
   ).length;
 
-  const closestNeo = findClosestNeo();
-
-  const fastestNeo = findFastestNeo();
-
   return (
     <div className="mb-3 rounded-lg border-slate-400 border-2">
       <h2 className="text-2xl px-3">{date}</h2>
       <p>Max estimated diameter: {maxEstimatedDiameter} km</p>
       <p>Potentially hazardous NEOs: {hazardousNeosCount}</p>
-      {closestNeo && <p>Closest NEO: {closestNeo.name}</p>}
-      {fastestNeo && <p>Fastest NEO: {fastestNeo.name}</p>}
+      {nearEarthObjects.length > 0 && (
+        <>
+          <p>Closest NEO: {findClosestNeo().name}</p>
+          <p>Fastest NEO: {findFastestNeo().name}</p>
+        </>
+      )}
     </div>
   );
 };
