@@ -1,4 +1,6 @@
-const Day = ({ date, nearEarthObjects }) => {
+import React from "react";
+
+const Day = ({ date, nearEarthObjects, isHighlighted }) => {
   const findClosestNeo = () => {
     let closestNeo = null;
     let minMissDistance = Infinity;
@@ -41,7 +43,11 @@ const Day = ({ date, nearEarthObjects }) => {
   ).length;
 
   return (
-    <div className="mb-3 rounded-lg border-slate-400 border-2">
+    <div
+      className={`mb-3 rounded-lg border-slate-400 border-2 ${
+        isHighlighted ? "bg-red-500" : ""
+      }`}
+    >
       <h2 className="text-2xl px-3">{date}</h2>
       <p>Max estimated diameter: {maxEstimatedDiameter} km</p>
       <p>Potentially hazardous NEOs: {hazardousNeosCount}</p>

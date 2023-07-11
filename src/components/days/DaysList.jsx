@@ -69,6 +69,30 @@ const DaysList = () => {
     };
   }, [currentIndex]);
 
+  const getTopHazardousDays = () => {
+    const hazardousCounts = days.map(
+      ({ nearEarthObjects }) =>
+        nearEarthObjects.filter((neo) => neo.is_potentially_hazardous_asteroid)
+          .length
+    );
+
+    const sortedCounts = hazardousCounts.slice().sort((a, b) => b - a);
+    const topTwoCounts = sortedCounts.slice(0, 2);
+
+    return days.map(({ date, nearEarthObjects }) => {
+      const hazardousNeosCount = nearEarthObjects.filter(
+        (neo) => neo.is_potentially_hazardous_asteroid
+      ).length;
+
+      return {
+        date,
+        nearEarthObjects,
+        isHighlighted:
+          hazardousNeosCount > 0 && topTwoCounts.includes(hazardousNeosCount),
+      };
+    });
+  };
+
   const formatDate = (date) => {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -78,9 +102,16 @@ const DaysList = () => {
 
   return (
     <div className="grid grid-cols-1 gap-2">
-      {days.map(({ date, nearEarthObjects }) => (
-        <Day key={date} date={date} nearEarthObjects={nearEarthObjects} />
-      ))}
+      {getTopHazardousDays().map(
+        ({ date, nearEarthObjects, isHighlighted }) => (
+          <Day
+            key={date}
+            date={date}
+            nearEarthObjects={nearEarthObjects}
+            isHighlighted={isHighlighted}
+          />
+        )
+      )}
     </div>
   );
 };
