@@ -117,7 +117,9 @@ const DaysList = () => {
           />
         )
       )}
-      {days.length < 6 && loading && <Spinner className="mx-auto mt-[40px]" animation="border" />}
+      {days.length < 6 && loading && (
+        <Spinner className="mx-auto mt-[40px]" animation="border" />
+      )}
     </div>
   );
 };
