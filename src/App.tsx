@@ -1,4 +1,4 @@
-//import DaysList from "./components/DaysList";
+import DaysList from "./components/DaysList";
 import Accordion from "react-bootstrap/Accordion";
 
 function App() {
@@ -47,7 +47,7 @@ function App() {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
-      {/* <DaysList /> */}
+      <DaysList />
     </div>
   );
 }
