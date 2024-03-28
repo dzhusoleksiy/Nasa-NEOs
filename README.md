@@ -1,30 +1,3 @@
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+# Nasa NEOs
+![image_2024-03-28_14-02-37](https://github.com/dzhusoleksiy/Nasa-NEOs/assets/121053807/fa92d8eb-ea2b-4643-b7a6-b87c69a477bd)
+This is a single-page React application with information about near-orbital objects (NEOs), organized in a list with a maximum of 6 elements. A new element is added every 5 seconds and contains aggregated data about a single day. The oldest element is removed when a new element is added if the list is full. Data starts fetching from the 1st day of the month until today's date. When it reaches today, it starts from the 1st day again. Every element contains the following data: the maximum estimated diameter of NEOs in kilometers for the day, the number of potentially hazardous NEOs per day, the closest NEO, and the fastest NEO. Elements with the 2 highest numbers of hazardous objects have a red background and are updated with each new element added. This app was created in Vite with React, TypeScript, Tailwind CSS, React Bootstrap, Lodash, and date-fns.
